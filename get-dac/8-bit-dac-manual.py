@@ -16,7 +16,7 @@ def number_to_dac(number):
 
 GPIO.setmode(GPIO.BCM)
 
-dac_bits = [24, 22, 23, 27, 17, 25, 12, 16]
+dac_bits = [22, 27, 17, 26, 25, 21, 20, 16]
 GPIO.setup(dac_bits, GPIO.OUT)
 
 dynamic_range = 3.3
