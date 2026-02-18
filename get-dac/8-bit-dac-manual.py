@@ -11,7 +11,8 @@ def voltage_to_number(voltage):
 
 def number_to_dac(number):
     for i in range(8):
-        GPIO.output(dac_bits[i], (number >> i) & 1)
+        bit_value = (number // (2 ** i)) % 2
+        GPIO.output(dac_bits[i], bit_value)
 
 
 GPIO.setmode(GPIO.BCM)
