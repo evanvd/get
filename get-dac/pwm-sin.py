@@ -7,7 +7,7 @@ signal_frequency = 10
 sampling_frequency = 1000
 
 try:
-    dac = pwm.PWM_DAC(12, 500, 3.3)
+    dac = pwm.PWM_DAC(12, 500, 3.2)
 
     t = 0
     while True:
