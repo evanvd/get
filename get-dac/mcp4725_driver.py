@@ -44,7 +44,7 @@ class MCP4725:
 
 if __name__ == "__main__":
     try:
-        dac = MCP4725(3.290, verbose=True)
+        dac = MCP4725(4.2, verbose=True)
 
         while True:
             try:

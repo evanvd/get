@@ -2,12 +2,12 @@ import mcp4725_driver as mcp
 import signal_generator as sg
 import time
 
-amplitude = 5.0
+amplitude = 4.2
 signal_frequency = 10
 sampling_frequency = 1000
 
 try:
-    dac = mcp.MCP4725(5.0, verbose=False)
+    dac = mcp.MCP4725(4.2, verbose=False)
 
     t = 0
     while True:
