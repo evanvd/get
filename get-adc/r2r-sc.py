@@ -2,9 +2,7 @@ from r2r_adc import R2R_ADC
 import time
 from adc_plot import plot_voltage_vs_time, plot_sampling_period_hist
 
-# Dynamic range should be measured with a multimeter
 DYN_RANGE = 3.3
-# Duration of the experiment in seconds
 duration = 3.0
 
 adc = R2R_ADC(dynamic_range=DYN_RANGE, compare_time=0.0001)

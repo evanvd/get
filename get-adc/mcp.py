@@ -2,9 +2,7 @@ from mcp3021_driver import MCP3021
 import time
 from adc_plot import plot_voltage_vs_time, plot_sampling_period_hist
 
-# Dynamic range should be measured with a multimeter
 DYN_RANGE = 3.3
-# Duration of the experiment in seconds
 duration = 5.0
 
 adc = MCP3021(dynamic_range=DYN_RANGE)

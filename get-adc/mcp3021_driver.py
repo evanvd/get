@@ -26,8 +26,6 @@ class MCP3021:
 
 if __name__ == '__main__':
     try:
-        # The dynamic range should be carefully measured with a multimeter
-        # on the PWR contact of the AUX block with the jumper on 5V.
         adc = MCP3021(dynamic_range=3.3, verbose=True)
         while True:
             voltage = adc.get_voltage()
