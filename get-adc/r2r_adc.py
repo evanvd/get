@@ -55,7 +55,7 @@ if __name__ == "__main__":
         adc = R2R_ADC(dynamic_range=3.3)
         while True:
             voltage = adc.get_sar_voltage()
-            print(f"Voltage: {voltage:.2f} V")
+            print(f"Напряжение: {voltage:.2f} В")
             time.sleep(1)
     finally:
         adc.deinit()

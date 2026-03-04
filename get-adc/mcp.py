@@ -19,7 +19,7 @@ try:
         
         voltage_values.append(voltage)
         time_values.append(current_time)
-        print(f"Time: {current_time:.2f}s, Voltage: {voltage:.2f}V")
+        print(f"Время: {current_time:.2f}с, Напряжение: {voltage:.2f}В")
 
     plot_voltage_vs_time(time_values, voltage_values, DYN_RANGE)
     plot_sampling_period_hist(time_values)

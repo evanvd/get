@@ -29,7 +29,7 @@ if __name__ == '__main__':
         adc = MCP3021(dynamic_range=3.3, verbose=True)
         while True:
             voltage = adc.get_voltage()
-            print(f"Voltage: {voltage:.2f} V")
+            print(f"Напряжение: {voltage:.2f} В")
             time.sleep(1)
     finally:
         adc.deinit()
