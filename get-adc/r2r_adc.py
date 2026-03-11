@@ -8,14 +8,17 @@ class R2R_ADC:
         
         self.bits_gpio = [26, 20, 19, 16, 13, 12, 25, 11]
         self.comp_gpio = 21
+        self._cleaned_up =False
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.bits_gpio, GPIO.OUT, initial = 0)
         GPIO.setup(self.comp_gpio, GPIO.IN)
         
         def deinit(self):
+            if not self.-_cleaned_up
         GPIO.output(self.bits_gpio, 0)
         GPIO.cleanup()
+        self._cleaned_up = True
     def number_to_dac(self, number):
         GPIO.output(self.bits_gpio, [int(element) for element in bin(number)[2:].zfill(8)])
     def sequential_counting_adc(self):
