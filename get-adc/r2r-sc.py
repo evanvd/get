@@ -22,3 +22,5 @@ try:
     adc_plot.plot_sampling_period_hist(time_vals)
 finally:
     adc.deinit()
+
+    
