@@ -34,14 +34,15 @@ class R2R_ADC:
 def sequential_counting_adc(self):
     number = 0
 
-    while number <= 255:
+    while not GPIO.input(self.comp_gpio):
         self.number_to_dac(number)
         time.sleep(self.compare_time)
 
-        if GPIO.input(self.comp_gpio):
-            break
-
         number += 1
+
+        if number > 255:
+            number = 255
+            break
 
     return number
     
