@@ -31,83 +31,19 @@ class R2R_ADC:
         self.number_to_dac(0)
         return num
     def successive_approximation_adc(self):
-        self.number_to_dac(0)
         num = 0
-        for bit in self.bits_gpio:
-            num *= 2
-            GPIO.output(bit, 1)
+        for i in range(8):
+            test_num = num | (1 << (7 - i))
+            self.number_to_dac(test_num)
             time.sleep(self.compare_time)
-            if GPIO.input(self.comp_gpio):
-                GPIO.output(bit, 0)
-            else:
-                num += 1
+            if not GPIO.input(self.comp_gpio):
+                num = test_num
         self.number_to_dac(0)
-        return num
-    def successive_approximation_adc_indian(self):
-        self.number_to_dac(0)
-        num = 0
-        GPIO.output(self.bits_gpio[0], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[0], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[1], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[1], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[2], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[2], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[3], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[3], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[4], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[4], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[5], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[5], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[6], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[6], 0)
-        else:
-            num += 1
-        num *= 2
-        GPIO.output(self.bits_gpio[7], 1)
-        time.sleep(self.compare_time)
-        if GPIO.input(self.comp_gpio):
-            GPIO.output(self.bits_gpio[7], 0)
-        else:
-            num += 1
         return num
     def get_sc_voltage(self):
         return self.sequential_counting_adc()/255*self.dynamic_range
     def get_sar_voltage(self):
         return self.successive_approximation_adc()/255*self.dynamic_range
-    def get_sar_voltage_indian(self):
-        return self.successive_approximation_adc_indian()/255*self.dynamic_range
 
 if __name__ == "__main__":
     try:

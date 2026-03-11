@@ -1,28 +1,24 @@
-from r2r_adc import R2R_ADC
+import r2r_adc as r2r
+import adc_plot
+import numpy as np
 import time
-from adc_plot import plot_voltage_vs_time, plot_sampling_period_hist
 
-DYN_RANGE = 3.3
+adc = r2r.R2R_ADC(3.177, compare_time=0.0001)
+
+voltage_vals = []
+time_vals = []
 duration = 3.0
 
-adc = R2R_ADC(dynamic_range=DYN_RANGE, compare_time=0.0001)
-
-voltage_values = []
-time_values = []
-
-
 try:
-    start_time = time.time()
-    while (time.time() - start_time) < duration:
-        voltage = adc.get_sc_voltage()
-        current_time = time.time() - start_time
-        
-        voltage_values.append(voltage)
-        time_values.append(current_time)
-        print(f"Время: {current_time:.2f}с, Напряжение: {voltage:.2f}В")
-
-    plot_voltage_vs_time(time_values, voltage_values, DYN_RANGE)
-    plot_sampling_period_hist(time_values)
-
+    begin_time = time.time_ns()
+    ctime = begin_time
+    while (ctime-begin_time)/1e9 < duration:
+        ctime = time.time_ns()
+        volt = adc.get_sc_voltage()
+        print(volt)
+        time_vals.append((ctime-begin_time)/1e9)
+        voltage_vals.append(volt)
+    adc_plot.plot_voltage_vs_time(time_vals, voltage_vals, np.max(voltage_vals))
+    adc_plot.plot_sampling_period_hist(time_vals)
 finally:
     adc.deinit()
