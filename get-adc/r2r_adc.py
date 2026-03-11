@@ -31,23 +31,20 @@ class R2R_ADC:
         bits = [int(bit) for bit in bin(number)[2:].zfill(8)]
         GPIO.output(self.bits_gpio, bits)
 
-    def sequential_counting_adc(self):
-        number = 0
+def sequential_counting_adc(self):
+    number = 0
 
-        while number < 256:
-            self.number_to_dac(number)
-            time.sleep(self.compare_time)
+    while number <= 255:
+        self.number_to_dac(number)
+        time.sleep(self.compare_time)
 
-            if GPIO.input(self.comp_gpio):
-                break
+        if GPIO.input(self.comp_gpio):
+            break
 
-            number += 1
+        number += 1
 
-        if number == 256:
-            number = 255
-
-        return number
-
+    return number
+    
     def get_sc_voltage(self):
         value = self.sequential_counting_adc()
         voltage = value / 255 * self.dynamic_range
